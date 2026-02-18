@@ -2,6 +2,7 @@ package services
 
 import (
 	"cloud.google.com/go/spanner"
+
 	"github.com/product-catalog-service/internal/app/product/queries/get_product"
 	"github.com/product-catalog-service/internal/app/product/queries/list_products"
 	"github.com/product-catalog-service/internal/app/product/repo"
@@ -12,9 +13,9 @@ import (
 	"github.com/product-catalog-service/internal/app/product/usecases/deactivate_product"
 	"github.com/product-catalog-service/internal/app/product/usecases/remove_discount"
 	"github.com/product-catalog-service/internal/app/product/usecases/update_product"
-	grpcHandler "github.com/product-catalog-service/internal/transport/grpc/product"
 	"github.com/product-catalog-service/internal/pkg/clock"
 	"github.com/product-catalog-service/internal/pkg/committer"
+	grpcHandler "github.com/product-catalog-service/internal/transport/grpc/product"
 )
 
 // Container holds all service dependencies.

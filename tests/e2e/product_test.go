@@ -2,7 +2,6 @@ package e2e
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"os"
 	"testing"
@@ -541,16 +540,4 @@ func createProductInCategory(t *testing.T, ctx context.Context, category string,
 	}
 
 	return productID
-}
-
-// Verify JSON payload structure
-func verifyEventPayload(t *testing.T, payload interface{}, expectedType string) {
-	data, err := json.Marshal(payload)
-	require.NoError(t, err)
-
-	var parsed map[string]interface{}
-	err = json.Unmarshal(data, &parsed)
-	require.NoError(t, err)
-
-	assert.Equal(t, expectedType, parsed["event_type"])
 }

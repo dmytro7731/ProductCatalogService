@@ -2,6 +2,7 @@ package contracts
 
 import (
 	"cloud.google.com/go/spanner"
+
 	"github.com/product-catalog-service/internal/app/product/domain"
 )
 
