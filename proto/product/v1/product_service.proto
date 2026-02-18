@@ -1,0 +1,156 @@
+syntax = "proto3";
+
+package product.v1;
+
+option go_package = "github.com/product-catalog-service/proto/product/v1;productv1";
+
+import "google/protobuf/timestamp.proto";
+
+// ProductService handles product catalog operations.
+service ProductService {
+    // Commands
+    rpc CreateProduct(CreateProductRequest) returns (CreateProductReply);
+    rpc UpdateProduct(UpdateProductRequest) returns (UpdateProductReply);
+    rpc ActivateProduct(ActivateProductRequest) returns (ActivateProductReply);
+    rpc DeactivateProduct(DeactivateProductRequest) returns (DeactivateProductReply);
+    rpc ArchiveProduct(ArchiveProductRequest) returns (ArchiveProductReply);
+    rpc ApplyDiscount(ApplyDiscountRequest) returns (ApplyDiscountReply);
+    rpc RemoveDiscount(RemoveDiscountRequest) returns (RemoveDiscountReply);
+
+    // Queries
+    rpc GetProduct(GetProductRequest) returns (GetProductReply);
+    rpc ListProducts(ListProductsRequest) returns (ListProductsReply);
+}
+
+// Money represents a monetary value with precise arithmetic.
+message Money {
+    int64 numerator = 1;
+    int64 denominator = 2;
+}
+
+// Discount represents a percentage-based discount.
+message Discount {
+    int64 percentage = 1;
+    google.protobuf.Timestamp start_date = 2;
+    google.protobuf.Timestamp end_date = 3;
+}
+
+// Product represents a product in the catalog.
+message Product {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+    string category = 4;
+    Money base_price = 5;
+    Money effective_price = 6;
+    Discount discount = 7;
+    string status = 8;
+    google.protobuf.Timestamp created_at = 9;
+    google.protobuf.Timestamp updated_at = 10;
+}
+
+// ProductListItem represents a product in a list response.
+message ProductListItem {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+    string category = 4;
+    Money base_price = 5;
+    Money effective_price = 6;
+    optional int64 discount_percent = 7;
+    string status = 8;
+    google.protobuf.Timestamp created_at = 9;
+}
+
+// CreateProductRequest is the request to create a new product.
+message CreateProductRequest {
+    string name = 1;
+    string description = 2;
+    string category = 3;
+    Money base_price = 4;
+}
+
+// CreateProductReply is the response after creating a product.
+message CreateProductReply {
+    string product_id = 1;
+}
+
+// UpdateProductRequest is the request to update a product.
+message UpdateProductRequest {
+    string product_id = 1;
+    string name = 2;
+    string description = 3;
+    string category = 4;
+}
+
+// UpdateProductReply is the response after updating a product.
+message UpdateProductReply {}
+
+// ActivateProductRequest is the request to activate a product.
+message ActivateProductRequest {
+    string product_id = 1;
+}
+
+// ActivateProductReply is the response after activating a product.
+message ActivateProductReply {}
+
+// DeactivateProductRequest is the request to deactivate a product.
+message DeactivateProductRequest {
+    string product_id = 1;
+}
+
+// DeactivateProductReply is the response after deactivating a product.
+message DeactivateProductReply {}
+
+// ArchiveProductRequest is the request to archive a product.
+message ArchiveProductRequest {
+    string product_id = 1;
+}
+
+// ArchiveProductReply is the response after archiving a product.
+message ArchiveProductReply {}
+
+// ApplyDiscountRequest is the request to apply a discount to a product.
+message ApplyDiscountRequest {
+    string product_id = 1;
+    int64 percentage = 2;
+    google.protobuf.Timestamp start_date = 3;
+    google.protobuf.Timestamp end_date = 4;
+}
+
+// ApplyDiscountReply is the response after applying a discount.
+message ApplyDiscountReply {}
+
+// RemoveDiscountRequest is the request to remove a discount from a product.
+message RemoveDiscountRequest {
+    string product_id = 1;
+}
+
+// RemoveDiscountReply is the response after removing a discount.
+message RemoveDiscountReply {}
+
+// GetProductRequest is the request to get a product by ID.
+message GetProductRequest {
+    string product_id = 1;
+}
+
+// GetProductReply is the response containing a product.
+message GetProductReply {
+    Product product = 1;
+}
+
+// ListProductsRequest is the request to list products.
+message ListProductsRequest {
+    optional string category = 1;
+    optional string status = 2;
+    bool active_only = 3;
+    int32 limit = 4;
+    int32 offset = 5;
+}
+
+// ListProductsReply is the response containing a list of products.
+message ListProductsReply {
+    repeated ProductListItem products = 1;
+    int64 total_count = 2;
+    bool has_more = 3;
+}
