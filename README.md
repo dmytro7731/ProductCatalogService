@@ -51,6 +51,26 @@ product-catalog-service/
 
 ## Architecture
 
+### Directory Structure Rationale
+
+The project follows a **vertical slice architecture** for use cases and queries, where each operation has its own directory:
+
+```
+usecases/
+├── create_product/    # CreateProduct command
+├── update_product/    # UpdateProduct command
+├── activate_product/  # ActivateProduct command
+└── ...
+```
+
+This pattern is intentional and provides:
+- **Isolation**: Each use case is self-contained with its own request/response types
+- **Scalability**: New features don't touch existing code
+- **Navigation**: Easy to find code by feature name
+- **Testing**: Tests co-located with implementation
+
+While this increases folder count, it's a recognized Go pattern for larger services and follows the "package by feature" principle.
+
 ### Domain Layer Purity
 
 The domain layer contains only pure Go business logic without external dependencies:
@@ -85,22 +105,17 @@ Every write operation follows this pattern:
 ### Start Spanner Emulator
 
 ```bash
-# Start all services (Spanner emulator + setup)
+# Start the Spanner emulator
 docker-compose up -d
 
-# Wait for setup to complete
-docker-compose logs -f spanner-setup
+# Run the setup script to create instance, database, and schema
+chmod +x scripts/setup-emulator.sh
+./scripts/setup-emulator.sh
 ```
 
 ### Run Migrations
 
-Migrations are automatically applied by `spanner-setup` service. To manually apply:
-
-```bash
-make migrate
-```
-
-Or manually with gcloud:
+Migrations are applied by the setup script. To manually apply with gcloud:
 
 ```bash
 gcloud config set auth/disable_credentials true
@@ -262,6 +277,34 @@ Products follow a state machine:
 | `product.archived` | Product soft deleted |
 | `product.discount_applied` | Discount added |
 | `product.discount_removed` | Discount removed |
+
+## CI/CD
+
+The project includes GitHub Actions workflows for automated quality gates:
+
+### Pipeline Stages
+
+1. **Lint**: Runs `golangci-lint` with project-specific configuration
+2. **Test**: Executes unit tests and E2E tests against Spanner emulator
+3. **Build**: Compiles the binary and builds Docker image
+
+### Running Locally
+
+```bash
+# Run linter
+make lint
+
+# Run all tests
+make test
+
+# Build binary
+make build
+```
+
+### Configuration
+
+- `.github/workflows/ci.yml`: CI pipeline definition
+- `.golangci.yml`: Linter configuration
 
 ## Development
 
