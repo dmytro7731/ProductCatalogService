@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/google/uuid"
+
 	"github.com/product-catalog-service/internal/app/product/domain"
 	"github.com/product-catalog-service/internal/app/product/repo"
 	"github.com/product-catalog-service/internal/pkg/clock"

@@ -5,6 +5,7 @@ import (
 
 	"cloud.google.com/go/spanner"
 	"github.com/google/uuid"
+
 	"github.com/product-catalog-service/internal/app/product/contracts"
 	"github.com/product-catalog-service/internal/app/product/domain"
 	"github.com/product-catalog-service/internal/models/m_outbox"

@@ -1,13 +1,14 @@
 package product
 
 import (
+	"google.golang.org/protobuf/types/known/timestamppb"
+
 	"github.com/product-catalog-service/internal/app/product/queries/get_product"
 	"github.com/product-catalog-service/internal/app/product/queries/list_products"
 	"github.com/product-catalog-service/internal/app/product/usecases/apply_discount"
 	"github.com/product-catalog-service/internal/app/product/usecases/create_product"
 	"github.com/product-catalog-service/internal/app/product/usecases/update_product"
 	pb "github.com/product-catalog-service/proto/product/v1"
-	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 // mapToCreateProductRequest converts proto request to application request.

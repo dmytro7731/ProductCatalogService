@@ -5,11 +5,12 @@ import (
 	"fmt"
 
 	"cloud.google.com/go/spanner"
+	"google.golang.org/api/iterator"
+
 	"github.com/product-catalog-service/internal/app/product/contracts"
 	"github.com/product-catalog-service/internal/app/product/domain"
 	"github.com/product-catalog-service/internal/models/m_product"
 	"github.com/product-catalog-service/internal/pkg/clock"
-	"google.golang.org/api/iterator"
 )
 
 // ReadModelRepo implements ProductReadModelRepository for Spanner.

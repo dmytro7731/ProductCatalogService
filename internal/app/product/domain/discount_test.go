@@ -4,9 +4,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/product-catalog-service/internal/app/product/domain"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	"github.com/product-catalog-service/internal/app/product/domain"
 )
 
 func TestNewDiscount(t *testing.T) {

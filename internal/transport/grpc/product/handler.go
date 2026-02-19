@@ -3,6 +3,9 @@ package product
 import (
 	"context"
 
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
+
 	"github.com/product-catalog-service/internal/app/product/queries/get_product"
 	"github.com/product-catalog-service/internal/app/product/queries/list_products"
 	"github.com/product-catalog-service/internal/app/product/usecases/activate_product"
@@ -13,8 +16,6 @@ import (
 	"github.com/product-catalog-service/internal/app/product/usecases/remove_discount"
 	"github.com/product-catalog-service/internal/app/product/usecases/update_product"
 	pb "github.com/product-catalog-service/proto/product/v1"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
 )
 
 // Commands holds all command usecases.

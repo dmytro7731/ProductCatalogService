@@ -7,15 +7,15 @@ import (
 )
 
 var (
-	ErrMissingProductID    = errors.New("product_id is required")
-	ErrMissingName         = errors.New("name is required")
-	ErrMissingCategory     = errors.New("category is required")
-	ErrMissingBasePrice    = errors.New("base_price is required")
-	ErrInvalidPercentage   = errors.New("percentage must be between 1 and 100")
-	ErrMissingStartDate    = errors.New("start_date is required")
-	ErrMissingEndDate      = errors.New("end_date is required")
-	ErrInvalidDenominator  = errors.New("base_price denominator must be positive")
-	ErrInvalidNumerator    = errors.New("base_price numerator must be positive")
+	ErrMissingProductID   = errors.New("product_id is required")
+	ErrMissingName        = errors.New("name is required")
+	ErrMissingCategory    = errors.New("category is required")
+	ErrMissingBasePrice   = errors.New("base_price is required")
+	ErrInvalidPercentage  = errors.New("percentage must be between 1 and 100")
+	ErrMissingStartDate   = errors.New("start_date is required")
+	ErrMissingEndDate     = errors.New("end_date is required")
+	ErrInvalidDenominator = errors.New("base_price denominator must be positive")
+	ErrInvalidNumerator   = errors.New("base_price numerator must be positive")
 )
 
 // validateCreateRequest validates CreateProductRequest.

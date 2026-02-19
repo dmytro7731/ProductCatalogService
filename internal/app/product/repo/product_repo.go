@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"cloud.google.com/go/spanner"
+
 	"github.com/product-catalog-service/internal/app/product/domain"
 	"github.com/product-catalog-service/internal/models/m_product"
 )
